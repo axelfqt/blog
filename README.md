@@ -1,6 +1,6 @@
 ## A propos
 
-Ce site est un projet Laravel 10 pour une remise à niveau laravel, j'ai
+Ce site est un projet Laravel 10 pour une remise à niveau, j'ai
 utilisé :
 * Laravel 10 (https://laravel.com/docs/10.x/releases)  
 * VueJs (https://vuejs.org/)

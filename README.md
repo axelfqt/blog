@@ -23,3 +23,4 @@ Disclamer : le blog est encore loin d'être terminé.
 
 * VsCode
 * Laravel 10
+* VueJs 3

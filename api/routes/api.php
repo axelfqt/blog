@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -25,4 +27,9 @@ Route::middleware('guest')->group(function () {
     Route::post('/article', [ArticleController::class, 'store']);
     Route::put('/article/{slug}', [ArticleController::class, 'update']);
     Route::delete('/article/{slug}', [ArticleController::class, 'destroy']);
+});
+
+Route::prefix('auth')->middleware('guest')->group(function (){
+    Route::post('/login', LoginController::class);
+    Route::post('/register', RegisterController::class);
 });

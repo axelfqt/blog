@@ -42,6 +42,11 @@ export default function useArticles(){
         await router.push({ name: 'home' })
     }
 
+    const uploadImage = async () => {
+        const data = new FormData();
+        data.append('image', this.image);
+    }
+
     return {
         errors,
         article,
@@ -50,6 +55,6 @@ export default function useArticles(){
         getArticles,
         storeArticle,
         updateArticle,
-        destroyArticle
+        destroyArticle,
     }
 }

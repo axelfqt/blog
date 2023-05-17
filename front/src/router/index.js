@@ -3,6 +3,7 @@ import Home from '../views/Home.vue';
 import Article from '../views/Article/Article.vue';
 import Create from '../views/Article/Create.vue';
 import Update from '../views/Article/Update.vue';
+import Login from '../views/Auth/Login.vue';
 
 const routes = [
     {
@@ -24,6 +25,11 @@ const routes = [
         path: '/article/update/:slug',
         name: 'articleUpdate',
         component: Update
+    },
+    {
+        path: '/login',
+        name: 'login',
+        component: Login
     },
 ]
 

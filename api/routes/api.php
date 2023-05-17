@@ -4,6 +4,7 @@ use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -32,6 +33,9 @@ Route::middleware('guest')->group(function (){
     Route::get('/article/{slug}', [ArticleController::class, 'singleArticle']);
     Route::put('/article/{slug}', [ArticleController::class, 'update']);
     Route::delete('/article/{slug}', [ArticleController::class, 'destroy']);
+
+    Route::get('/users/{name}', [UserController::class, 'findUsers']);
+    Route::get('/user/{name}', [UserController::class, 'showUser']);
 });
 
 Route::prefix('auth')->middleware('guest')->group(function (){

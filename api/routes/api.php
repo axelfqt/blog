@@ -24,12 +24,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::middleware('auth:sanctum')->group(function (){
     Route::get('/logout', LogoutController::class);
+    Route::post('/article', [ArticleController::class, 'store']);
 });
 
 Route::middleware('guest')->group(function (){
     Route::get('/articles', [ArticleController::class, 'index']);
     Route::get('/article/{slug}', [ArticleController::class, 'singleArticle']);
-    Route::post('/article', [ArticleController::class, 'store']);
     Route::put('/article/{slug}', [ArticleController::class, 'update']);
     Route::delete('/article/{slug}', [ArticleController::class, 'destroy']);
 });

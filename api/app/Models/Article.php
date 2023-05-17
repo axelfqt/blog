@@ -18,6 +18,11 @@ class Article extends Model
         return $this->belongsToMany(Tag::class);
     }
 
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
+
     public function saveTags(string $tags)
     {
         $tags = array_filter(array_unique(array_map(function ($item) {

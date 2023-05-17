@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Article;
-use App\Http\Requests\StoreArticleRequest;
-use App\Http\Requests\UpdateArticleRequest;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Resources\ArticleResource;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\StoreArticleRequest;
+use App\Http\Requests\UpdateArticleRequest;
+use Illuminate\Http\Request;
 
 class ArticleController extends Controller
 {
@@ -23,9 +25,9 @@ class ArticleController extends Controller
      */
     public function store(StoreArticleRequest $request)
     {
-        Storage::disk('public')->put('Article', $request->image);
-        $article = Article::create($request->validated());
-
+        $article = Auth::user()->articles()->create($request->all());
+        $article->saveTags($request->get('tags'));
+        
         return ArticleResource::make($article);
     }
 

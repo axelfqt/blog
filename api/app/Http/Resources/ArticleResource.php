@@ -21,7 +21,8 @@ class ArticleResource extends JsonResource
             'description' => $this->description,
             'image' => $this->image,
             'created' => $this->created_at,
-            'tags' => $this->tags
+            'tags' => $this->tags,
+            'user_id' => $this->user_id
         ];
     }
 }

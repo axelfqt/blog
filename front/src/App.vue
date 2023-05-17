@@ -14,7 +14,7 @@
             <li><a class="hover:text-gray-200" href="/">Home</a></li>
             <li><a class="hover:text-gray-200" href="/article">Créer un article</a></li>
             <li><a class="hover:text-gray-200" href="/profil">Mon profil</a></li>
-            <li><a class="hover:text-gray-200" href="/logout">Déconnexion</a></li>
+            <li><a class="hover:text-gray-200" @click="userLogout">Déconnexion</a></li>
           </ul>
         </div>
         <a class="xl:hidden flex mr-6 items-center" href="#">
@@ -35,7 +35,10 @@
   import { onMounted } from "vue";
   import useAuth from "./resources/js/composables/Auth";
 
-  const {isLogin, getUserToken} = useAuth();
+  const {isLogin, getUserToken, logout} = useAuth();
+  const userLogout = async () => {
+    await logout()
+  }
   onMounted(() => getUserToken());
 
   console.log(isLogin);

@@ -13,8 +13,8 @@
           <ul v-if="isLogin" class="hidden md:flex px-4 mx-auto font-semibold font-heading space-x-12">
             <li><a class="hover:text-gray-200" href="/">Home</a></li>
             <li><a class="hover:text-gray-200" href="/article">Créer un article</a></li>
-            <li><a class="hover:text-gray-200" href="#">Mon profil</a></li>
-            <li><a class="hover:text-gray-200" href="#">Déconnexion</a></li>
+            <li><a class="hover:text-gray-200" href="/profil">Mon profil</a></li>
+            <li><a class="hover:text-gray-200" href="/logout">Déconnexion</a></li>
           </ul>
         </div>
         <a class="xl:hidden flex mr-6 items-center" href="#">

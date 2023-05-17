@@ -6,6 +6,7 @@ use App\Models\Article;
 use App\Http\Requests\StoreArticleRequest;
 use App\Http\Requests\UpdateArticleRequest;
 use App\Http\Resources\ArticleResource;
+use Illuminate\Support\Facades\Storage;
 
 class ArticleController extends Controller
 {
@@ -22,6 +23,7 @@ class ArticleController extends Controller
      */
     public function store(StoreArticleRequest $request)
     {
+        Storage::disk('public')->put('Article', $request->image);
         $article = Article::create($request->validated());
 
         return ArticleResource::make($article);

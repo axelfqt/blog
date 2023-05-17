@@ -4,6 +4,7 @@ import Article from '../views/Article/Article.vue';
 import Create from '../views/Article/Create.vue';
 import Update from '../views/Article/Update.vue';
 import Login from '../views/Auth/Login.vue';
+import Register from '../views/Auth/Register.vue';
 
 const routes = [
     {
@@ -30,6 +31,11 @@ const routes = [
         path: '/login',
         name: 'login',
         component: Login
+    },
+    {
+        path: '/register',
+        name: 'register',
+        component: Register
     },
 ]
 

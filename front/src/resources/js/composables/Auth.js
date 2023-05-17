@@ -5,12 +5,18 @@ import { useRouter } from "vue-router";
 export default function useAuth(){
     const router = useRouter();
     let isLogin = ref(false)
+    let token = ref();
+
+    const redirectTo = async (path) => {
+        await router.push({ name: path })
+        router.go();
+    }
 
     const storeUser = async (data) => {
         try{
             const resp = await axios.post('http://localhost:8000/api/auth/login', data, {withCredentials:true})
             window.$cookies.set('Bearer', resp.data)
-            await router.push({ name: 'home' })
+            redirectTo('home')
         }catch(e){
             console.log(e);
         }
@@ -19,7 +25,7 @@ export default function useAuth(){
     const createUser = async (data) => {
         try{
             const resp = await axios.post('http://localhost:8000/api/auth/register', data, {withCredentials: true})
-            await router.push({ name: 'login' })
+            redirectTo('login')
         }catch(e){
             console.log(e);
         }
@@ -27,18 +33,27 @@ export default function useAuth(){
 
     const getUserToken = async () => {
         try{
-            let token = window.$cookies.get('Bearer');
-            const resp = await axios.get('http://localhost:8000/api/user', {headers: {Authorization: `Bearer ${token}`}})
-            isLogin.value = true
+            token = window.$cookies.get('Bearer');
+            if(token){
+                const resp = await axios.get('http://localhost:8000/api/user', {headers: {Authorization: `Bearer ${token}`}})
+                isLogin.value = true
+            }
         }catch(e){
-            console.log(e);
+            return;
         }
+    }
+
+    const logout = async () => {
+        await axios.get('http://localhost:8000/api/logout', {headers: {Authorization: `Bearer ${token}`}})
+        window.$cookies.remove('Bearer')
+        redirectTo('home')
     }
 
     return {
         isLogin,
         storeUser,
         createUser,
-        getUserToken
+        getUserToken,
+        logout
     }
 }

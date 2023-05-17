@@ -17,10 +17,10 @@ return new class extends Migration
             $table->string('slug');
         });
 
-        Schema::create('article_tag', function (Blueprint $table){
-            $table->integer('article_id')->unsigned()->index();
+        Schema::create('article_tag', function (Blueprint $table) {
+            $table->unsignedBigInteger('article_id');
             $table->foreign('article_id')->references('id')->on('articles')->onDelete('cascade');
-            $table->integer('tag_id')->unsigned()->index();
+            $table->unsignedBigInteger('tag_id');
             $table->foreign('tag_id')->references('id')->on('tags')->onDelete('cascade');
         });
     }

@@ -4,11 +4,17 @@
       <nav class="flex justify-between bg-gray-900 text-white w-screen">
         <div class="px-5 xl:px-12 py-6 flex w-full items-center">
           <a class="text-3xl font-bold font-heading" href="#">Blog</a>
-          <ul class="hidden md:flex px-4 mx-auto font-semibold font-heading space-x-12">
+          <ul v-if="!isLogin" class="hidden md:flex px-4 mx-auto font-semibold font-heading space-x-12">
             <li><a class="hover:text-gray-200" href="/">Home</a></li>
-            <li><a class="hover:text-gray-200" href="/article">Créer</a></li>
-            <li><a class="hover:text-gray-200" href="#">Editer</a></li>
-            <li><a class="hover:text-gray-200" href="#">Contact Us</a></li>
+            <li><a class="hover:text-gray-200" href="/login">Se connecter</a></li>
+            <li><a class="hover:text-gray-200" href="/register">S'enregistrer</a></li>
+          </ul>
+
+          <ul v-if="isLogin" class="hidden md:flex px-4 mx-auto font-semibold font-heading space-x-12">
+            <li><a class="hover:text-gray-200" href="/">Home</a></li>
+            <li><a class="hover:text-gray-200" href="/article">Créer un article</a></li>
+            <li><a class="hover:text-gray-200" href="#">Mon profil</a></li>
+            <li><a class="hover:text-gray-200" href="#">Déconnexion</a></li>
           </ul>
         </div>
         <a class="xl:hidden flex mr-6 items-center" href="#">
@@ -24,3 +30,13 @@
   </div>
 <router-view/>
 </template>
+
+<script setup>
+  import { onMounted } from "vue";
+  import useAuth from "./resources/js/composables/Auth";
+
+  const {isLogin, getUserToken} = useAuth();
+  onMounted(() => getUserToken());
+
+  console.log(isLogin);
+</script>

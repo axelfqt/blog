@@ -9,11 +9,13 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@okta/okta-auth-js": "^7.3.0",
     "axios": "^1.4.0",
     "moment": "^2.29.4",
     "vue": "^3.2.47",
     "vue-cookies": "^1.8.3",
-    "vue-router": "^4.2.0"
+    "vue-router": "^4.2.0",
+    "vuex": "^4.0.2"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.1.0",

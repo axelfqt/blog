@@ -1,8 +1,10 @@
 import axios from "axios"
+import { ref } from "vue";
 import { useRouter } from "vue-router";
 
 export default function useAuth(){
     const router = useRouter();
+    let isLogin = ref(false)
 
     const storeUser = async (data) => {
         try{
@@ -23,8 +25,20 @@ export default function useAuth(){
         }
     }
 
+    const getUserToken = async () => {
+        try{
+            let token = window.$cookies.get('Bearer');
+            const resp = await axios.get('http://localhost:8000/api/user', {headers: {Authorization: `Bearer ${token}`}})
+            isLogin.value = true
+        }catch(e){
+            console.log(e);
+        }
+    }
+
     return {
+        isLogin,
         storeUser,
-        createUser
+        createUser,
+        getUserToken
     }
 }

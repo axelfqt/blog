@@ -7,6 +7,7 @@ export default function useArticles(){
     const articles = ref([]);
     const errors = ref('')
     const router = useRouter();
+    const token = window.$cookies.get('Bearer');
 
     const getArticles = async () => {
         let response = await axios.get('http://localhost:8000/api/articles');
@@ -14,13 +15,14 @@ export default function useArticles(){
     }
 
     const getArticle = async (slug) => {
-        let response = await axios.get(`http://localhost:8000/api/article/${slug}`)
+        let response = await axios.get(`http://localhost:8000/api/article/${slug}`);
+        console.log(response);
         article.value = response.data.data
     }
 
     const storeArticle = async (data) => {
         try {
-            await axios.post('http://localhost:8000/api/article', data)
+            await axios.post('http://localhost:8000/api/article', data, {headers: {Authorization: `Bearer ${token}`}})
             await router.push({ name: 'home' })
         } catch (e) {
             console.log(e);

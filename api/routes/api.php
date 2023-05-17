@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -21,7 +22,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::middleware('guest')->group(function () {
+Route::middleware('auth:sanctum')->group(function (){
+    Route::get('/logout', LogoutController::class);
+});
+
+Route::middleware('guest')->group(function (){
     Route::get('/articles', [ArticleController::class, 'index']);
     Route::get('/article/{slug}', [ArticleController::class, 'singleArticle']);
     Route::post('/article', [ArticleController::class, 'store']);
